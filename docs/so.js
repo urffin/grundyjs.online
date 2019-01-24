@@ -38,7 +38,8 @@ var SO = {
     defaultOptions: {
         order:'desc',
         sort: 'votes',
-        site: 'stackoverflow'
+        site: 'stackoverflow',
+        key: 'tQnIcpToSZjxX8mrTSnFhw(('
     },
     optionsToQuery(options){
         return Object.entries(Object.assign({}, this.defaultOptions,options)).map(([k,v])=>`${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
