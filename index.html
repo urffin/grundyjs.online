@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Grundy On-line
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Personal Grundy online page.">
+    <meta name="keywords" content="grundy, ruso, enso, stackoverflow, stackexchange, answers">
+    <style>
+        body {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .flair {
+            text-align: center;
+            font-size: 0;
+            margin: auto;
+        }
+
+        header.small .flair {
+            overflow: hidden;
+            width: 57px;
+            margin-left: 10px;
+            margin-right: 0px;
+            border-right: 1px solid #ccc;
+        }
+
+        header {
+            max-width: 1200px;
+            margin: auto;
+            transition: .3s ease-in transform;
+        }
+
+        header.small {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        header.small .hamb {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2em;
+            height: 2em;
+        }
+
+        header.small.down .hamb .hamb-inner::before {
+            top: 0;
+            opacity: 0;
+        }
+
+        header.small.down .hamb .hamb-inner {
+            transform: rotate(-45deg);
+        }
+
+        header.small.down .hamb .hamb-inner::after {
+            transform: rotate(90deg);
+            top: 0;
+        }
+
+        header.small .hamb .hamb-inner {
+            position: absolute;
+            height: 4px;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 4px;
+            background-color: #909090;
+            transition: .12s ease all;
+        }
+
+        header.small .hamb .hamb-inner::before {
+            content: '';
+            position: absolute;
+            top: -.5em;
+            width: 100%;
+            height: 4px;
+            border-radius: 4px;
+            background-color: #909090;
+            transition: .12s ease all;
+        }
+
+        header.small .hamb .hamb-inner::after {
+            content: '';
+            position: absolute;
+            bottom: -.5em;
+            width: 100%;
+            height: 4px;
+            border-radius: 4px;
+            background-color: #909090;
+            transition: .12s ease transform;
+        }
+
+        .oops .main-list {
+            display: none;
+        }
+
+        .oops {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        header.small .main-list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateY(-118px);
+            padding: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .down {
+            transform: translateY(118px);
+        }
+
+        .page {
+            margin: 20px auto;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .post img {
+            max-width: 100%;
+        }
+
+        .post .heading {
+            box-shadow: 0 5px 5px -5px black;
+        }
+
+        .post blockquote {
+            margin: 0 0 .2em 0;
+            padding: .5em 0 .5em 1em;
+            background-color: rgba(255, 165, 0, 0.063);
+            border-left: 3px solid #ffa500;
+        }
+
+        .post pre {
+            max-width: 100%;
+            max-height: 100vh;
+            overflow: auto;
+        }
+
+        .page.loading::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 30px;
+            border-bottom: 1px solid green;
+            animation: loading 3s infinite alternate;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(2.5);
+            }
+
+        }
+
+        .answer {
+            font-size: 20px;
+            display: flex;
+            border-bottom: 1px solid #f0f0f0;
+            border-top: 1px solid #f0f0f0;
+            margin-top: -1px;
+        }
+
+        .answer .score {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            text-align: center;
+            display: inline-block;
+            min-width: 80px;
+            vertical-align: middle;
+        }
+
+        .answer .score::before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .answer .score.accepted {
+            background-color: rgb(8, 104, 3);
+            color: #fff;
+        }
+
+        .answer .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            padding: 0.4em 0.8em;
+        }
+
+        .answer .link {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tags a {
+            font-size: medium;
+            text-decoration: none;
+            color: black;
+            padding: 0.1em;
+            border: 1px solid rgb(238, 238, 238);
+        }
+
+        .tags a:active {
+            border: 1px inset rgb(238, 238, 238);
+        }
+
+        .answer .title {
+            word-break: break-word;
+        }
+
+        #showMore {
+            width: 100%;
+            border: none;
+            padding: 10px 0;
+            background-color: rgba(144, 238, 144, 0.251);
+        }
+
+        .container {
+            transition: .3s ease-in transform;
+        }
+
+        .main-list {
+            list-style: none;
+        }
+
+        .main-list li a {
+            padding: 10px;
+            display: block;
+        }
+
+        .pager {
+            padding: 5px 0;
+            text-align: center;
+        }
+
+        .pager .pager-button {
+            display: inline-block;
+            color: black;
+            text-align: center;
+            margin: 3px;
+            padding: 5px;
+            border: 1px solid rgb(238, 238, 238);
+            text-decoration: none;
+            min-width: 30px;
+        }
+
+        .pager .pager-button.active {
+            border-color: #000;
+        }
+
+        @media (max-width:1230px) {
+
+            header,
+            .page {
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+        }
+
+        @media (max-width:767px) {
+            .answer .info {
+                padding: 0.2em;
+            }
+
+            .answer {
+                flex-direction: column;
+            }
+
+            .answer .score {
+                padding-top: 5px;
+                padding-bottom: 5px;
+                min-width: auto;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            header {
+                flex-direction: column;
+            }
+
+            header.small .hamb {
+                position: relative;
+                transform: translateY(50%);
+            }
+
+            header.small .flair {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="hamb">
+            <div class="hamb-inner"></div>
+        </div>
+        <h1>Grundy On-line</h1>
+        <div class="flair"><a href="https://ru.stackoverflow.com/users/186999/grundy" target="_blank" rel="noreferrer"><img
+                    src="https://ru.stackoverflow.com/users/flair/186999.png" width="208" height="58" alt="Профиль участника Grundy на сайте &#171;Stack Overflow на русском&#187;,Вопросы и ответы для программистов"
+                    title="Профиль участника Grundy на сайте &#171;Stack Overflow на русском&#187;,Вопросы и ответы для программистов"></a></div>
+        <ul class="main-list">
+            <li><a href="#/list/top">Топ</a></li>
+            <li><a href="#/list/active">Последние активные</a></li>
+        </ul>
+    </header>
+    <div class="container"></div>
+    <script src="so.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
