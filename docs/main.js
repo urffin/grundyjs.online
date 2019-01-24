@@ -28,9 +28,6 @@ var site = "ru.stackoverflow";
             if (m) {
                 currentRoute = c;
                 h(...m);
-                gtag('send', 'pageview', {
-                    'page': location.pathname + location.search + location.hash
-                });
                 return;
             }
         }
