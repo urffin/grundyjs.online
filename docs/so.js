@@ -1,3 +1,6 @@
+Object.entries = Object.entries || function(o){
+    return Object.keys(o).map(function(key){ return [key, this[key]];}, o);
+};
 var SO = {
     baseAddress: "https://api.stackexchange.com",
     version: "2.2",
