@@ -96,7 +96,7 @@ var site = "ru.stackoverflow";
                         <div class="title"><a href="#/a/${a.answer_id}">${a.title}</a></div>
                         <div class="link">
                             <div class="tags">
-                                ${ a.tags.map(tag => `<a target="_blank" rel="noreferrer" href="https://${site}.com/questions/tagged/${tag}">${tag}</a>`).join(' ')}
+                                ${ a.tags.map(function(tag){ return `<a target="_blank" rel="noreferrer" href="https://${site}.com/questions/tagged/${tag}">${tag}</a>`;}).join(' ')}
                             </div>
                             <a target="_blank" rel="noreferrer" href="https://${site}.com/a/${a.answer_id}/${userId}">источник</a>
                         </div>
