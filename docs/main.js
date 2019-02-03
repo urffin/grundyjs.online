@@ -30,7 +30,7 @@ var site = "ru.stackoverflow";
             var m = location.hash.match(r);
             if (m) {
                 currentRoute = c;
-                h(...m);
+                h.apply(null,m);
                 return;
             }
         }
