@@ -23,7 +23,10 @@ var site = "ru.stackoverflow";
         header.classList.remove('down');
         container.classList.remove('down');
 
-        for (var [r, h, c] of routeMapping) {
+        for (var a in routeMapping) {
+            var r = routeMapping[a][0];
+            var h = routeMapping[a][1];
+            var c = routeMapping[a][2];
             var m = location.hash.match(r);
             if (m) {
                 currentRoute = c;
@@ -63,7 +66,8 @@ var site = "ru.stackoverflow";
                 page,
                 pageSize,
                 filter: SO.filters.minAnswerInfoWithTags
-            }).then(({ items }) => {
+            }).then(function(r) {
+                var items = r.items;
                 renderAnswersList(answersListEl, items);
             });
         }
@@ -72,12 +76,13 @@ var site = "ru.stackoverflow";
                 site,
                 sort,
                 filter: SO.filters.answersTotalCount
-            }).then(({ total }) => {
+            }).then(function (r) {
+                var total = r.total;
                 renderPager(pagerEl, total, pageSize, page, window.innerWidth < 420 ? 3 : 5);
             });
         }
         function renderAnswersList(answersListEl, answers) {
-            answersListEl.innerHTML = answers.map(a => `
+            answersListEl.innerHTML = answers.map(function(a){ return `
                 <div class="answer">
                     <span class="score ${a.is_accepted ? 'accepted' : ''}">${a.score}</span>
                     <div class="info">
@@ -90,7 +95,7 @@ var site = "ru.stackoverflow";
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `;}).join('');
         }
 
         var { answersSectionEl, answersListEl, heading, pagerEl } = function createAnswersListEl() {
@@ -112,7 +117,7 @@ var site = "ru.stackoverflow";
             return { answersSectionEl, answersListEl, heading, pagerEl };
         }();
         function renderPager(pagerEl, total, pageSize, curPage, pagerButtonCount) {
-            var template = index => `<a href="${currentRoute(index)}" class="pager-button ${curPage == index ? 'active' : ''}">${index}</a>`;
+            var template = function(index){ return `<a href="${currentRoute(index)}" class="pager-button ${curPage == index ? 'active' : ''}">${index}</a>`;};
             var half = Math.floor(pagerButtonCount / 2);
             var totalPageCount = Math.ceil(total / pageSize);
             var startPageNum = Math.max(curPage - half, 1);
@@ -147,7 +152,7 @@ var site = "ru.stackoverflow";
             header.classList.add('small');
 
             answersSectionEl.classList.add('loading');
-            loadUserAnswers({ page, pageSize }).then(() => answersSectionEl.classList.remove('loading'));
+            loadUserAnswers({ page, pageSize }).then(function(){ return answersSectionEl.classList.remove('loading');});
             loadAnswersCount({ page, pageSize });
             if (answersSectionEl.parentNode) return;
 
@@ -190,7 +195,7 @@ var site = "ru.stackoverflow";
             source.innerHTML = '';
         }
         function showPost(post) {
-            info.innerHTML = post.tags.map(tag => `<a target="_blank" rel="noreferrer" href="https://${site}.com/questions/tagged/${tag}">${tag}</a>`).join(' ');
+            info.innerHTML = post.tags.map(function(tag){ return `<a target="_blank" rel="noreferrer" href="https://${site}.com/questions/tagged/${tag}">${tag}</a>`;}).join(' ');
             heading.innerHTML = post.title;
             content.innerHTML = post.body;
             source.innerHTML = `<a target="_blank" rel="noreferrer" href="https://${site}.com/a/${post.answer_id}/${userId}">источник</a>`
@@ -215,8 +220,8 @@ var site = "ru.stackoverflow";
                 })
                     .then(({ items: [item] }) => !item ? Promise.reject(`Not found post #${id}`) : item)
                     .then(showPost)
-                    .catch((error) => console.log(error) || showOops())
-                    .then(() => postEl.classList.remove('loading'));
+                    .catch(function(error){ return console.log(error) || showOops();})
+                    .then(function() { return postEl.classList.remove('loading');});
 
             }
 
