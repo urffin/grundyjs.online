@@ -105,7 +105,7 @@ var site = "ru.stackoverflow";
             `;}).join('');
         }
 
-        var { answersSectionEl, answersListEl, heading, pagerEl } = function createAnswersListEl() {
+        var cal = function createAnswersListEl() {
             var answersSectionEl = document.createElement('section');
             answersSectionEl.classList.add('page');
 
@@ -121,8 +121,12 @@ var site = "ru.stackoverflow";
             pagerEl.classList.add('pager');
             answersSectionEl.appendChild(pagerEl);
 
-            return { answersSectionEl, answersListEl, heading, pagerEl };
+            return { a1: answersSectionEl, a2: answersListEl, a3: heading, a4: pagerEl };
         }();
+        var answersSectionEl = cal.a1;
+        var answersListEl = cal.a2;
+        var heading = cal.a3;
+        var pagerEl = cal.a4;
         function renderPager(pagerEl, total, pageSize, curPage, pagerButtonCount) {
             var template = function(index){ return `<a href="${currentRoute(index)}" class="pager-button ${curPage == index ? 'active' : ''}">${index}</a>`;};
             var half = Math.floor(pagerButtonCount / 2);
