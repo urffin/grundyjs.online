@@ -12,13 +12,15 @@ var SO = {
         'CreationDate': 'creation',
         'Score': 'votes'
     },
-    answers(...ids){
+    answers(){
+        var ids = [].slice.call(arguments);
         return {
             url: `answers/${ids}${ids.length?'':'/'}`,
             method: 'GET'
         };
     },
-    users(...ids){
+    users(){
+        var ids = [].slice.call(arguments);
         return {
             url: `users/${ids}${ids.length?'':'/'}`,
             method: 'GET',
