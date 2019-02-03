@@ -35,7 +35,7 @@ var SO = {
     exec: function(request, options){
         return fetch(`${this.baseAddress}/${this.version}/${request.url}?${this.optionsToQuery(options)}`,{
             method: request.method
-        }).then(r=> r.json())
+        }).then(function(r){ return r.json();})
     },
     defaultOptions: {
         order:'desc',
