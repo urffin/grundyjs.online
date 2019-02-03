@@ -58,8 +58,13 @@ var site = "ru.stackoverflow";
         }
     };
 
-    function showList({ sort, pageHeading } = {}) {
-        function loadUserAnswers({ page, pageSize }) {
+    function showList(p) {
+        p = p || {};
+        var sort = p.sort;
+        var pageHeading = p.pageHeading;
+        function loadUserAnswers(p1) {
+            var page = p1.page;
+            var pageSize = p1.pageSize;
             return SO.exec(userAnswers, {
                 site,
                 sort,
