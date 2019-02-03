@@ -164,8 +164,8 @@ var site = "ru.stackoverflow";
             header.classList.add('small');
 
             answersSectionEl.classList.add('loading');
-            loadUserAnswers({ page, pageSize }).then(function(){ return answersSectionEl.classList.remove('loading');});
-            loadAnswersCount({ page, pageSize });
+            loadUserAnswers({ page: page, pageSize: pageSize }).then(function(){ return answersSectionEl.classList.remove('loading');});
+            loadAnswersCount({ page: page, pageSize: pageSize });
             if (answersSectionEl.parentNode) return;
 
             if (container.firstChild) {
@@ -180,7 +180,7 @@ var site = "ru.stackoverflow";
     var showLast = showList({ sort: SO.sortBy.LastActivityDate, pageHeading: 'Активные' });
 
     var showPost = function () {
-        var { el: postEl, heading, content, info, source } = function createPostEl() {
+        var cpe = function createPostEl() {
             var el = document.createElement('section');
             el.classList.add('post', 'page');
 
@@ -198,8 +198,13 @@ var site = "ru.stackoverflow";
             var source = document.createElement('div');
             source.classList.add('source-link-container');
             el.appendChild(source);
-            return { el, heading, content, info, source };
+            return { el: el, heading: heading, content: content, info: info, source: source };
         }();
+        var postEl = cpe.el;
+        var heading = cpe.heading;
+        var content = cpe.content;
+        var info = cpe.info;
+        var source = cpe.source;
         function clearPost(heading, content) {
             heading.innerHTML = '';
             content.innerHTML = '';
