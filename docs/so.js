@@ -24,7 +24,7 @@ var SO = {
         return {
             url: `users/${ids}${ids.length?'':'/'}`,
             method: 'GET',
-            answers(){
+            answers: function(){
                 return {
                     url: `${this.url}/answers`,
                     method: 'GET'
