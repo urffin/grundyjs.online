@@ -12,14 +12,14 @@ var SO = {
         'CreationDate': 'creation',
         'Score': 'votes'
     },
-    answers(){
+    answers: function(){
         var ids = [].slice.call(arguments);
         return {
             url: `answers/${ids}${ids.length?'':'/'}`,
             method: 'GET'
         };
     },
-    users(){
+    users: function(){
         var ids = [].slice.call(arguments);
         return {
             url: `users/${ids}${ids.length?'':'/'}`,
@@ -32,7 +32,7 @@ var SO = {
             }
         };
     },
-    exec(request, options){
+    exec: function(request, options){
         return fetch(`${this.baseAddress}/${this.version}/${request.url}?${this.optionsToQuery(options)}`,{
             method: request.method
         }).then(r=> r.json())
@@ -43,7 +43,7 @@ var SO = {
         site: 'stackoverflow',
         key: 'tQnIcpToSZjxX8mrTSnFhw(('
     },
-    optionsToQuery(options){
+    optionsToQuery: function(options){
         return Object.entries(Object.assign({}, this.defaultOptions,options)).map(([k,v])=>`${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
     }
 };
