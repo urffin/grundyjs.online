@@ -66,20 +66,22 @@ var site = "ru.stackoverflow";
             var page = p1.page;
             var pageSize = p1.pageSize;
             return SO.exec(userAnswers, {
-                site,
-                sort,
-                page,
-                pageSize,
+                sitr: site,
+                sort: sort,
+                page: page,
+                pageSize: pageSize,
                 filter: SO.filters.minAnswerInfoWithTags
             }).then(function(r) {
                 var items = r.items;
                 renderAnswersList(answersListEl, items);
             });
         }
-        function loadAnswersCount({ page, pageSize }) {
+        function loadAnswersCount(p2) {
+            var page = p2.page;
+            var pageSize = p2.pageSize;
             return SO.exec(userAnswers, {
-                site,
-                sort,
+                site: site,
+                sort: sort,
                 filter: SO.filters.answersTotalCount
             }).then(function (r) {
                 var total = r.total;
@@ -153,7 +155,8 @@ var site = "ru.stackoverflow";
             pagerEl.innerHTML = pages.join('');
         };
 
-        return function (page, pageSize = 30) {
+        return function (page, pageSize) {
+            pageSize = pageSize || 30;
             header.classList.add('small');
 
             answersSectionEl.classList.add('loading');
