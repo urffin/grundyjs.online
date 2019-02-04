@@ -66,7 +66,7 @@ var site = "ru.stackoverflow";
             var page = p1.page;
             var pageSize = p1.pageSize;
             return SO.exec(userAnswers, {
-                sitr: site,
+                site: site,
                 sort: sort,
                 page: page,
                 pageSize: pageSize,
