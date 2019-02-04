@@ -47,6 +47,8 @@ var SO = {
         key: 'tQnIcpToSZjxX8mrTSnFhw(('
     },
     optionsToQuery: function(options){
+        var r = Object.entries({});
+        var t = Object.assign({}, this.defaultOptions,options);
         return Object.entries(Object.assign({}, this.defaultOptions,options)).map(function(el){ var k=el[0]; var v=el[1]; return `${encodeURIComponent(k)}=${encodeURIComponent(v)}`;}).join('&');
     }
 };
