@@ -1,6 +1,19 @@
+/* polyfill section */
 Object.entries = Object.entries || function(o){
     return Object.keys(o).map(function(key){ return [key, this[key]];}, o);
 };
+
+Object.assign = Object.assign || function (o) {
+    for (var i = 1; i<arguments.length;i++){
+        if(typeof o !== 'object') continue;
+        for(var a in arguments[i]){
+            o[a] = arguments[i][a];
+        }
+    }
+    return o;
+};
+
+/* end polyfill section */
 var SO = {
     baseAddress: "https://api.stackexchange.com",
     version: "2.2",
