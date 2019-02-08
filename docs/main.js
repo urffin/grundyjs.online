@@ -178,6 +178,9 @@ var site = "ru.stackoverflow";
             answersSectionEl.classList.add('loading');
             loadUserAnswers({ page: page, pageSize: pageSize }).then(function(){ return answersSectionEl.classList.remove('loading');});
             loadAnswersCount({ page: page, pageSize: pageSize });
+            
+            setMeta(pageHeading + (page>1? ' стр. ' + page: ''), pageHeading +' ответы Grundy На ru.stackoverflow');
+            
             if (answersSectionEl.parentNode) return;
 
             if (container.firstChild) {
@@ -185,7 +188,6 @@ var site = "ru.stackoverflow";
             }
   
             container.appendChild(answersSectionEl);
-            setMeta(pageHeading + (page>1? ' стр. ' + page: ''), pageHeading +' ответы Grundy На ru.stackoverflow');
         };
     };
 
