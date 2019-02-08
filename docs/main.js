@@ -4,6 +4,18 @@ var grundyId = {
 var site = "ru.stackoverflow";
 
 (function (userId, site, SO) {
+    var meta = {
+        description: document.querySelector('meta[name="description"]'),
+        keywords: document.querySelector('meta[name="keywords"]'),
+        title: document.querySelector('title')
+    };
+    function setMeta(title, descr, keyw){
+        meta.title.textContent = title + ' - Grundy On-line';
+        if(descr)
+            meta.description.setAttribute('content', descr);
+        if(keyw)
+            meta.keywords.setAttribute('content', keyw);
+    }
     window.addEventListener('hashchange', route);
     var routeMapping = [[
         /^#\/list\/top(\/(\d+))?$/, function (_, _, curPage) {
@@ -171,8 +183,9 @@ var site = "ru.stackoverflow";
             if (container.firstChild) {
                 return container.replaceChild(answersSectionEl, container.firstChild);
             }
-
+  
             container.appendChild(answersSectionEl);
+            setMeta(pageHeading + (page>1? ' стр. ' + page: ''), pageHeading +' ответы Grundy На ru.stackoverflow');
         };
     };
 
@@ -221,6 +234,7 @@ var site = "ru.stackoverflow";
                 a.target = '_blank';
                 a.rel = 'noreferrer';
             }
+            return post;
         }
         return function (type, id) {
             if (postEl.dataset.postId != id) {
@@ -237,6 +251,7 @@ var site = "ru.stackoverflow";
                 })
                     .then(function(r){ return !r.items[0] ? Promise.reject(`Not found post #${id}`) : r.items[0];})
                     .then(showPost)
+                    .then(post=>setMeta('О: '+post.title, 'Ответ Grundy на вопрос '+ post.title))
                     .catch(function(error){ return console.log(error) || showOops();})
                     .then(function() { return postEl.classList.remove('loading');});
 
