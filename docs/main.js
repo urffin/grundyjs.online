@@ -256,7 +256,7 @@ var site = "ru.stackoverflow";
                     .then(function(r){ return !r.items[0] ? Promise.reject(`Not found post #${id}`) : r.items[0];})
                     .then(showPost)
                     .then(function(post){setMeta('О: '+post.title, 'Ответ Grundy на вопрос '+ post.title)})
-                    .catch(function(error){ return console.log(error) || showOops(error);})
+                    .catch(function(error){ return console.log(error) || showOops( [].join.call(arguments));})
                     .then(function() { return postEl.classList.remove('loading');});
 
             }
