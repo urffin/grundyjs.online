@@ -7,7 +7,8 @@ var site = "ru.stackoverflow";
     var meta = {
         description: document.querySelector('meta[name="description"]'),
         keywords: document.querySelector('meta[name="keywords"]'),
-        title: document.querySelector('title')
+        title: document.querySelector('title'),
+        canonical: document.querySelector('link[rel="canonical"]')
     };
     function setMeta(title, descr, keyw){
         meta.title.textContent = title + ' - Grundy On-line';
@@ -15,6 +16,7 @@ var site = "ru.stackoverflow";
             meta.description.setAttribute('content', descr);
         if(keyw)
             meta.keywords.setAttribute('content', keyw);
+        meta.canonical.setAttribute('href', location);
     }
     window.addEventListener('hashchange', route);
     var routeMapping = [[
