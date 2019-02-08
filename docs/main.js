@@ -18,16 +18,16 @@ var site = "ru.stackoverflow";
     }
     window.addEventListener('hashchange', route);
     var routeMapping = [[
-        /^#\/list\/top(\/(\d+))?$/, function (_, _, curPage) {
+        /^#!\/list\/top(\/(\d+))?$/, function (_, _, curPage) {
             showTop(Number(curPage) || 1);
-        }, function (pageNum) { return `#/list/top/${pageNum}`; }], [
-        /^#\/list\/active(\/(\d+))?$/, function (_, _, curPage) {
+        }, function (pageNum) { return `#!/list/top/${pageNum}`; }], [
+        /^#!\/list\/active(\/(\d+))?$/, function (_, _, curPage) {
             showLast(Number(curPage) || 1);
-        }, function (pageNum) { return `#/list/active/${pageNum}`; }], [
-        /^#\/(a|q)\/(\d+)$/, function (_, type, id) {
+        }, function (pageNum) { return `#!/list/active/${pageNum}`; }], [
+        /^#!\/(a|q)\/(\d+)$/, function (_, type, id) {
             showPost(type, id);
-        }, function (type, id) { return `#/${type}/${id}`; }], [
-        /^#?\/?$/, function(){ showTop(1); }, function () { return ''; }
+        }, function (type, id) { return `#!/${type}/${id}`; }], [
+        /^(#!)?\/?$/, function(){ showTop(1); }, function () { return ''; }
     ]
     ];
     var currentRoute;
