@@ -256,7 +256,7 @@ var site = "ru.stackoverflow";
                     .then(function(r){ return !r.items[0] ? Promise.reject(`Not found post #${id}`) : r.items[0];})
                     .then(showPost)
                     .then(function(post){setMeta('О: '+post.title, 'Ответ Grundy на вопрос '+ post.title)})
-                    .catch(function(error){ return console.log(error) || showOops();})
+                    .catch(function(error){ return console.log(error) || showOops(error);})
                     .then(function() { return postEl.classList.remove('loading');});
 
             }
@@ -272,9 +272,13 @@ var site = "ru.stackoverflow";
     var showOops = function () {
         var oopsEl = document.createElement('div');
         oopsEl.classList.add('oops');
-        oopsEl.innerHTML = `Что-то пошло не так... <br>Попробуйте <a href="#">начать с начала</a>`;
-        return function () {
+        var defaultMsg = `Что-то пошло не так... <br>Попробуйте <a href="#">начать с начала</a>`
+        oopsEl.innerHTML = defaultMsg;
+        return function (error) {
             header.classList.add('oops');
+            if(error){
+                oopsEl.innerHTML = defaultMsg + '<br>' + error;
+            }
             if (container.firstChild) {
                 return container.replaceChild(oopsEl, container.firstChild);
             }
