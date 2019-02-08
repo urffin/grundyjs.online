@@ -105,7 +105,7 @@ var site = "ru.stackoverflow";
                 <div class="answer">
                     <span class="score ${a.is_accepted ? 'accepted' : ''}">${a.score}</span>
                     <div class="info">
-                        <div class="title"><a href="#/a/${a.answer_id}">${a.title}</a></div>
+                        <div class="title"><a href="#!/a/${a.answer_id}">${a.title}</a></div>
                         <div class="link">
                             <div class="tags">
                                 ${ a.tags.map(function(tag){ return `<a target="_blank" rel="noreferrer" href="https://${site}.com/questions/tagged/${tag}">${tag}</a>`;}).join(' ')}
