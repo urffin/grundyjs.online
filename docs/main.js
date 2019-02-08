@@ -109,7 +109,7 @@ var site = "ru.stackoverflow";
             var answersSectionEl = document.createElement('section');
             answersSectionEl.classList.add('page');
 
-            var heading = document.createElement('h2');
+            var heading = document.createElement('h1');
             heading.textContent = pageHeading;
             answersSectionEl.appendChild(heading);
 
@@ -188,7 +188,7 @@ var site = "ru.stackoverflow";
             info.classList.add('tags');
             el.appendChild(info);
 
-            var heading = document.createElement('h2');
+            var heading = document.createElement('h1');
             heading.classList.add('heading');
             el.appendChild(heading);
 
