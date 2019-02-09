@@ -230,17 +230,24 @@ var site = "ru.stackoverflow";
         }
         function showPost(post) {
             var d = document.createElement('div');
-            d.innerHTML = 'showPost - debug post:' + JSON.stringify(post);
+            d.innerHTML = 'showPost - debug start';
             document.body.appendChild(d);
             info.innerHTML = post.tags.map(function(tag){ return `<a target="_blank" rel="noreferrer" href="https://${site}.com/questions/tagged/${tag}">${tag}</a>`;}).join(' ');
             heading.innerHTML = post.title;
             content.innerHTML = post.body;
             source.innerHTML = `<a target="_blank" rel="noreferrer" href="https://${site}.com/a/${post.answer_id}/${userId}">источник</a>`
+            var d = document.createElement('div');
+            d.innerHTML = 'showPost - debug before for..of: ' + (typeof content.querySelectorAll);
+            document.body.appendChild(d);
 
             for (var a of content.querySelectorAll('a')) {
                 a.target = '_blank';
                 a.rel = 'noreferrer';
             }
+            var d = document.createElement('div');
+            d.innerHTML = 'showPost - debug before return';
+            document.body.appendChild(d);
+
             return post;
         }
         return function (type, id) {
