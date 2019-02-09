@@ -229,6 +229,9 @@ var site = "ru.stackoverflow";
             source.innerHTML = '';
         }
         function showPost(post) {
+            var d = document.createElement('div');
+            d.innerHTML = 'showPost - debug post:' + JSON.stringify(post);
+            body.appendChild(d);
             info.innerHTML = post.tags.map(function(tag){ return `<a target="_blank" rel="noreferrer" href="https://${site}.com/questions/tagged/${tag}">${tag}</a>`;}).join(' ');
             heading.innerHTML = post.title;
             content.innerHTML = post.body;
