@@ -29,7 +29,7 @@ var site = "ru.stackoverflow";
         /^#!\/(a|q)\/(\d+)$/, function (_, type, id) {
             showPost(type, id);
         }, function (type, id) { return `#!/${type}/${id}`; }], [
-        /^(#!)?\/?$/, function(){ showTop(1); }, function () { return ''; }
+        /^(#!)?\/?$/, function(){ showTop(1); }, function (pageNum) { return `#!/list/top/${pageNum}`; }
     ]
     ];
     var currentRoute;
